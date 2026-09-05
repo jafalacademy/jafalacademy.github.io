@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منصة جفال التعليمية</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    /* ===== المتغيرات ===== */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --light-blue: #eff6ff;
+      --dark: #172033;
+      --text: #5b687a;
+      --white: #ffffff;
+      --green: #16a085;
+      --border: #e5eaf2;
+      --purple: #7c3aed;
+      --yellow: #f59e0b;
+      --gold: #fbbf24;
+      --bg-body: #ffffff;
+      --bg-card: #ffffff;
+      --bg-section: #f8fbff;
+      --shadow: rgba(15, 23, 42, 0.1);
+      --text-dark: #172033;
+    }
+
+    /* الوضع الداكن */
+    body.dark-mode {
+      --bg-body: #0f172a;
+      --bg-card: #1e293b;
+      --bg-section: #0f172a;
+      --dark: #e2e8f0;
+      --text: #94a3b8;
+      --white: #1e293b;
+      --border: #334155;
+      --shadow: rgba(0, 0, 0, 0.4);
+      --text-dark: #f1f5f9;
+      --light-blue: #1e293b;
+    }
+
+    body.dark-mode .hero {
+      background:
+        radial-gradient(circle at 10% 20%, #1e293b 0, transparent 28%),
+        radial-gradient(circle at 90% 40%, #1e293b 0, transparent 30%),
+        #0f172a;
+    }
+
+    body.dark-mode .feature-card,
+    body.dark-mode .video-card,
+    body.dark-mode .testimonial-card,
+    body.dark-mode .price-card,
+    body.dark-mode .contact-box {
+      background: var(--bg-card);
+      border-color: var(--border);
+    }
+
+    body.dark-mode .teacher-image {
+      border-color: var(--bg-card);
+    }
+
+    body.dark-mode .floating {
+      background: var(--bg-card);
+      color: var(--text-dark);
+    }
+
+    body.dark-mode .section-title p {
+      color: var(--text);
+    }
+
+    body.dark-mode .price-card .price-label {
+      color: var(--text-dark);
+    }
+
+    body.dark-mode .price-card .price-note {
+      color: var(--text);
+    }
+
+    body.dark-mode .btn-instagram {
+      box-shadow: 0 6px 20px rgba(220, 39, 67, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Cairo", sans-serif;
+      color: var(--dark);
+      background: var(--bg-body);
+      line-height: 1.8;
+      overflow-x: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    /* ===== الهيدر ===== */
+    header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 1000;
+      width: 100%;
+      height: 76px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.4s, border-color 0.4s;
+    }
+
+    body.dark-mode header {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: var(--border);
+    }
+
+    nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+      font-size: 23px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .logo-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--purple));
+      border-radius: 14px;
+      font-size: 21px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 23px;
+      list-style: none;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -7px;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-button,
+    .main-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      overflow: hidden;
+      color: #fff;
+      background: var(--primary);
+      border-radius: 10px;
+      font-weight: 700;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-button {
+      padding: 10px 20px;
+    }
+    .main-button {
+      padding: 13px 25px;
+    }
+
+    .nav-button:hover,
+    .main-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .nav-button::after,
+    .main-button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -120%;
+      width: 60%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.22);
+      transform: skewX(-25deg);
+      transition: 0.6s;
+    }
+
+    .nav-button:hover::after,
+    .main-button:hover::after {
+      right: 130%;
+    }
+
+    .menu-button {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: var(--dark);
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    /* ===== زر الوضع الداكن ===== */
+    .dark-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--dark);
+      display: grid;
+      place-items: center;
+      transition: 0.3s;
+    }
+
+    .dark-toggle:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ===== الهيرو ===== */
+    .hero {
+      padding: 160px 0 105px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 10% 20%, #dbeafe 0, transparent 28%),
+        radial-gradient(circle at 90% 40%, #ede9fe 0, transparent 30%),
+        #f8fbff;
+      transition: background 0.4s;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 15px;
+      margin-bottom: 18px;
+      color: var(--primary);
+      background: #dbeafe;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    body.dark-mode .badge {
+      background: #1e293b;
+    }
+
+    h1 {
+      margin-bottom: 22px;
+      font-size: clamp(38px, 5vw, 65px);
+      line-height: 1.25;
+    }
+    h1 span {
+      color: var(--primary);
+    }
+
+    .hero-text {
+      max-width: 570px;
+      margin-bottom: 30px;
+      color: var(--text);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .outline-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      color: var(--dark);
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+    .outline-button:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    body.dark-mode .outline-button {
+      border-color: var(--border);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 390px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-width: 500px;
+      height: 390px;
+      object-fit: cover;
+      border-radius: 28px;
+      box-shadow: 0 22px 60px rgba(37, 99, 235, 0.2);
+      transform: rotate(-3deg);
+      animation: imageFloat 4s ease-in-out infinite;
+      transition: 0.4s;
+    }
+    .hero-image:hover {
+      transform: rotate(0deg) scale(1.02);
+      animation-play-state: paused;
+    }
+
+    @keyframes imageFloat {
+      0%,
+      100% {
+        transform: rotate(-3deg) translateY(0);
+      }
+      50% {
+        transform: rotate(-3deg) translateY(-12px);
+      }
+    }
+
+    .floating {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 18px;
+      color: var(--dark);
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+      font-weight: 700;
+      animation: floatingCard 3s ease-in-out infinite;
+    }
+    .float-one {
+      top: 35px;
+      right: 5px;
+    }
+    .float-two {
+      bottom: 42px;
+      left: 0;
+      animation-delay: 1s;
+    }
+
+    @keyframes floatingCard {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* ===== الأقسام العامة ===== */
+    section {
+      padding: 90px 0;
+      transition: background 0.4s;
+    }
+
+    .section-title {
+      max-width: 650px;
+      margin: 0 auto 45px;
+      text-align: center;
+    }
+    .section-title h2 {
+      margin-bottom: 12px;
+      font-size: 35px;
+    }
+    .section-title p {
+      color: var(--text);
+    }
+
+    /* ===== المميزات ===== */
+    .features {
+      background: var(--bg-body);
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .feature-card {
+      padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      transition: 0.35s;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: #bfdbfe;
+      box-shadow: 0 15px 35px var(--shadow);
+    }
+    body.dark-mode .feature-card:hover {
+      border-color: var(--primary);
+    }
+    .feature-icon {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      color: var(--primary);
+      background: var(--light-blue);
+      border-radius: 14px;
+      font-size: 24px;
+    }
+    .feature-card h3 {
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    /* ===== الأستاذ ===== */
+    .teacher {
+      background: var(--bg-section);
+    }
+    .teacher-content {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 70px;
+    }
+    .teacher-image-box {
+      display: flex;
+      justify-content: center;
+    }
+    .teacher-image {
+      width: 100%;
+      max-width: 390px;
+      height: 440px;
+      object-fit: cover;
+      border: 8px solid #fff;
+      border-radius: 28px;
+      box-shadow: 0 20px 45px rgba(37, 99, 235, 0.18);
+      transition: border-color 0.4s;
+    }
+    .teacher-info h2 {
+      margin: 12px 0 5px;
+      font-size: 40px;
+    }
+    .teacher-info h3 {
+      margin-bottom: 18px;
+      color: var(--primary);
+      font-size: 21px;
+    }
+    .teacher-info p {
+      margin-bottom: 20px;
+      color: var(--text);
+      font-size: 17px;
+      line-height: 2;
+    }
+    .teacher-info strong {
+      color: var(--primary);
+    }
+    .checks {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 28px;
+      list-style: none;
+    }
+    .checks li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .checks li i {
+      color: var(--green);
+    }
+
+    /* ===== الفيديوهات ===== */
+    .videos {
+      background: var(--bg-body);
+    }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+    .video-card {
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--shadow);
+      transition: 0.35s;
+    }
+    .video-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 38px rgba(37, 99, 235, 0.15);
+    }
+    .video-wrapper {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      background: #111827;
+    }
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #111827;
+    }
+    .video-info {
+      padding: 18px;
+      text-align: center;
+    }
+    .video-info h3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+    .video-info h3 i {
+      color: var(--primary);
+    }
+    .video-info p {
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    /* ===== آراء الطلاب ===== */
+    .testimonials {
+      background: var(--bg-section);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .testimonial-card {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      transition: 0.35s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-8px);
+      border-color: #bfdbfe;
+      box-shadow: 0 15px 35px var(--shadow);
+    }
+    body.dark-mode .testimonial-card:hover {
+      border-color: var(--primary);
+    }
+    .testimonial-card::before {
+      content: "“";
+      position: absolute;
+      top: 4px;
+      left: 20px;
+      color: #bfdbfe;
+      font-family: Georgia, serif;
+      font-size: 78px;
+      line-height: 1;
+    }
+    .student-info {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 18px;
+    }
+    .student-avatar {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--purple));
+      border-radius: 50%;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .student-info h3 {
+      margin-bottom: 2px;
+      font-size: 17px;
+    }
+    .student-info span {
+      color: var(--text);
+      font-size: 13px;
+    }
+    .testimonial-card p {
+      color: var(--text);
+      font-size: 15px;
+      line-height: 2;
+    }
+    .stars {
+      margin-top: 18px;
+      color: var(--yellow);
+      letter-spacing: 3px;
+    }
+
+    /* ===== التواصل + بطاقة السعر ===== */
+    .contact {
+      text-align: center;
+      background: var(--bg-body);
+    }
+
+    .contact-box {
+      max-width: 750px;
+      margin: auto;
+      padding: 45px 25px;
+      background: var(--light-blue);
+      border-radius: 22px;
+      transition: background 0.4s;
+      border: 1px solid var(--border);
+    }
+
+    .contact-box h2 {
+      margin-bottom: 8px;
+      font-size: 32px;
+    }
+
+    .contact-box p {
+      margin: 12px auto 25px;
+      color: var(--text);
+    }
+
+    /* ===== بطاقة السعر ===== */
+    .price-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 35px 25px 30px;
+      margin: 25px auto 30px;
+      max-width: 450px;
+      box-shadow: 0 12px 40px var(--shadow);
+      border: 2px solid var(--gold);
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(251, 191, 36, 0.05), transparent, rgba(251, 191, 36, 0.05), transparent);
+      animation: rotateGlow 10s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotateGlow {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .price-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 50px rgba(251, 191, 36, 0.2);
+      border-color: var(--primary);
+    }
+
+    .price-card .price-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-card .price-header i {
+      color: var(--gold);
+      font-size: 28px;
+    }
+
+    .price-card .price-header h3 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .price-card .price-value {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 10px 0 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-card .price-value small {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .price-card .price-divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--primary));
+      margin: 12px auto;
+      border-radius: 3px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-card .price-features {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 20px;
+      text-align: right;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-card .price-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .price-card .price-features li i {
+      color: var(--green);
+      font-size: 18px;
+    }
+
+    .price-card .price-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      color: #92400e;
+      padding: 4px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    body.dark-mode .price-card .price-badge {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #1e293b;
+    }
+
+    .price-card .price-badge i {
+      margin-left: 6px;
+    }
+
+    /* ===== زر إنستغرام ===== */
+    .btn-instagram {
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: #fff;
+      border: none;
+      padding: 16px 40px;
+      border-radius: 14px;
+      font-size: 20px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 6px 25px rgba(220, 39, 67, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-instagram:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(220, 39, 67, 0.5);
+    }
+
+    .btn-instagram i {
+      font-size: 28px;
+    }
+
+    /* ===== زر الصعود للأعلى ===== */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 999;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--purple));
+      color: #fff;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+      transition: 0.4s;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.8);
+      display: grid;
+      place-items: center;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 12px 35px rgba(37, 99, 235, 0.6);
+    }
+
+    /* ===== الفوتر ===== */
+    footer {
+      padding: 28px 0;
+      color: #cbd5e1;
+      background: #172033;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    body.dark-mode footer {
+      background: #0f172a;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ===== أنيميشن الظهور ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feature-card,
+    .video-card,
+    .testimonial-card {
+      opacity: 0;
+      transform: translateY(25px);
+      animation: cardAppear 0.8s ease forwards;
+    }
+    .feature-card:nth-child(1),
+    .video-card:nth-child(1),
+    .testimonial-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    .feature-card:nth-child(2),
+    .video-card:nth-child(2),
+    .testimonial-card:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+    .feature-card:nth-child(3),
+    .video-card:nth-child(3),
+    .testimonial-card:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes cardAppear {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== الجوال ===== */
+    @media (max-width: 800px) {
+      .nav-links,
+      .nav-button {
+        display: none;
+      }
+      .menu-button {
+        display: block;
+      }
+      .nav-links.active {
+        position: absolute;
+        top: 76px;
+        right: 0;
+        display: flex;
+        width: 100%;
+        padding: 22px;
+        flex-direction: column;
+        gap: 15px;
+        background: var(--bg-card);
+        box-shadow: 0 10px 20px var(--shadow);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links a::after {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 125px;
+      }
+      .hero-content,
+      .teacher-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+      .hero-text {
+        margin-right: auto;
+        margin-left: auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-image {
+        width: 90%;
+        height: 330px;
+        animation: none;
+      }
+      .floating {
+        padding: 10px 13px;
+        font-size: 13px;
+      }
+      .float-one {
+        top: 20px;
+        right: 0;
+      }
+      .float-two {
+        bottom: 25px;
+        left: 0;
+      }
+
+      .feature-grid,
+      .videos-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+      .video-card {
+        width: min(100%, 360px);
+        margin: auto;
+      }
+      .teacher-image {
+        height: 380px;
+      }
+      .teacher-info h2 {
+        font-size: 32px;
+      }
+      .teacher-info .checks {
+        text-align: right;
+      }
+      .contact-box h2 {
+        font-size: 26px;
+      }
+
+      .price-card .price-value {
+        font-size: 42px;
+      }
+
+      .header-actions .nav-button {
+        display: none;
+      }
+
+      .scroll-top {
+        bottom: 20px;
+        left: 20px;
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== الهيدر ===== -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#home" class="logo">
+          <span class="logo-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+          منصة جفال
+        </a>
+
+        <button class="menu-button" onclick="toggleMenu()" aria-label="فتح القائمة">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">الرئيسية</a></li>
+          <li><a href="#features">مميزاتنا</a></li>
+          <li><a href="#teacher">الأستاذ محمد جفال</a></li>
+          <li><a href="#videos">الفيديوهات</a></li>
+          <li><a href="#testimonials">آراء الطلاب</a></li>
+          <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+
+        <div class="header-actions">
+          <button class="dark-toggle" onclick="toggleDarkMode()" aria-label="تبديل الوضع الداكن">
+            <i class="fa-solid fa-moon" id="darkIcon"></i>
+          </button>
+          <a href="#contact" class="nav-button">
+            <i class="fa-solid fa-rocket"></i> ابدأ الآن
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== الهيرو ===== -->
+    <section class="hero" id="home">
+      <div class="container hero-content reveal">
+        <div>
+          <span class="badge">
+            <i class="fa-solid fa-star"></i> مستقبلك يبدأ من هنا
+          </span>
+          <h1>معاً نحو الرسوب<br /><span>وابنِ مستقبلك</span></h1>
+          <p class="hero-text">
+            منصة جفال التعليمية تمنحك تجربة تعلم مرنة وممتعة،
+            مع محتوى تعليمي يساعدك على تطوير مهاراتك وتحقيق أهدافك.
+          </p>
+          <div class="hero-actions">
+            <a href="#videos" class="main-button">
+              <i class="fa-solid fa-play"></i> شاهد الفيديوهات
+            </a>
+            <a href="#features" class="outline-button">
+              <i class="fa-solid fa-circle-info"></i> تعرف علينا
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img src="https://i.imgur.com/mxrlgTu.jpeg" alt="منصة جفال التعليمية" class="hero-image" />
+          <div class="floating float-one">
+            <i class="fa-solid fa-book-open"></i> محتوى مميز
+          </div>
+          <div class="floating float-two">
+            <i class="fa-solid fa-chart-line"></i> تعلم مستمر
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== المميزات ===== -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>لماذا منصة جفال؟</h2>
+          <p>كل ما تحتاجه لتجعل التعلم أسهل وأكثر فاعلية.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-book-open"></i></div>
+            <h3>محتوى تعليمي متنوع</h3>
+            <p>محتوى مبسط ومنظم يساعدك على الفهم والتطبيق بطريقة عملية.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-clock"></i></div>
+            <h3>تعلم في أي وقت</h3>
+            <p>طوّر مهاراتك بالسرعة والوقت المناسبين لك ومن أي مكان.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h3>طوّر مهاراتك</h3>
+            <p>اكتسب المعرفة والخبرات التي تساعدك في دراستك وحياتك المهنية.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== الأستاذ ===== -->
+    <section class="teacher" id="teacher">
+      <div class="container teacher-content">
+        <div class="teacher-image-box reveal">
+          <!-- الصورة الجديدة من الرابط الذي أرسلته -->
+          <img
+            src="https://i.ibb.co/5gBPBYmz/file-30532.jpg"
+            alt="الأستاذ محمد جفال"
+            class="teacher-image"
+          />
+        </div>
+        <div class="teacher-info reveal">
+          <span class="badge"><i class="fa-solid fa-user-tie"></i> تعرف على معلمك</span>
+          <h2>الأستاذ محمد جفال</h2>
+          <h3>مدرس مادة الأحياء</h3>
+          <p>
+            الأستاذ محمد جفال، مدرس أحياء وصاحب منصة
+            <strong>المليون راسب</strong>، يقدم محتوى تعليميًا مبسطًا
+            يساعد الطلاب على فهم مادة الأحياء بطريقة سهلة وممتعة.
+          </p>
+          <ul class="checks">
+            <li><i class="fa-solid fa-circle-check"></i> شرح مبسط ومتكامل لمادة الأحياء</li>
+            <li><i class="fa-solid fa-circle-check"></i> مراجعات واختبارات تساعد على تثبيت المعلومات</li>
+            <li><i class="fa-solid fa-circle-check"></i> أسلوب تعليمي قريب ومناسب للطلاب</li>
+          </ul>
+          <a href="#contact" class="main-button">
+            <i class="fa-solid fa-user-plus"></i> انضم إلى منصة جفال
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== الفيديوهات ===== -->
+    <section class="videos" id="videos">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>شاهد محتوى الأستاذ</h2>
+          <p>مجموعة من الفيديوهات والبثوث التعليمية الخاصة بالأستاذ محمد جفال.</p>
+        </div>
+        <div class="videos-grid">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="https://f.top4top.io/m_3900bkb5q0.mp4" type="video/mp4" />
+                متصفحك لا يدعم تشغيل الفيديو.
+              </video>
+            </div>
+            <div class="video-info">
+              <h3><i class="fa-solid fa-circle-play"></i> نبذة عن مكثف الأستاذ</h3>
+              <p>تعرف على المكثف ومحتواه التعليمي.</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="https://g.top4top.io/m_3900t40701.mp4" type="video/mp4" />
+                متصفحك لا يدعم تشغيل الفيديو.
+              </video>
+            </div>
+            <div class="video-info">
+              <h3><i class="fa-solid fa-video"></i> بعض بثوث الأستاذ</h3>
+              <p>شاهد نماذج من البثوث التعليمية.</p>
+            </div>
+          </div>
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="https://h.top4top.io/m_39002798o2.mp4" type="video/mp4" />
+                متصفحك لا يدعم تشغيل الفيديو.
+              </video>
+            </div>
+            <div class="video-info">
+              <h3><i class="fa-solid fa-comments"></i> آراء طلاب الأستاذ</h3>
+              <p>استمع إلى تجارب وآراء الطلاب.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== آراء الطلاب ===== -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>ماذا يقول طلابنا؟</h2>
+          <p>تجارب طلاب استفادوا من أسلوب منصة جفال التعليمية.</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="student-info">
+              <div class="student-avatar">أ</div>
+              <div>
+                <h3>أحمد خالد</h3>
+                <span>طالب توجيهي</span>
+              </div>
+            </div>
+            <p>يزم الله لا يسامحك نجحت بكل المواد الا الاحياء </p>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="student-info">
+              <div class="student-avatar">س</div>
+              <div>
+                <h3>سارة علي</h3>
+                <span>طالبة توجيهي صحي</span>
+              </div>
+            </div>
+            <p>بابا كان يشتغل ليل نهار عشان يجمع حق بطاقتك وبالآخر رسبت حسبس الله ونعم الوكيل</p>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="student-info">
+              <div class="student-avatar">م</div>
+              <div>
+                <h3>محمد ياسر</h3>
+                <span>طالب توجيهي </span>
+              </div>
+            </div>
+            <p>رسبت الله لا يسامحك رجعلي المصاري تبعوني</p>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== التواصل + بطاقة السعر ===== -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-box reveal">
+
+          <h2>هل أنت مستعد للبدء؟</h2>
+          <p>انضم إلى مجتمع جفال وابدأ رحلة التعلم والتطور اليوم.</p>
+
+          <!-- ===== بطاقة السعر ===== -->
+          <div class="price-card">
+            <div class="price-header">
+              <i class="fa-solid fa-crown"></i>
+              <h3>بطاقة منصة جفال</h3>
+            </div>
+
+            <div class="price-value">
+              49 <small>د.أ</small>
+            </div>
+
+            <div class="price-divider"></div>
+
+            <ul class="price-features">
+              <li><i class="fa-solid fa-check-circle"></i> وصول كامل للمحتوى التعليمي</li>
+              <li><i class="fa-solid fa-check-circle"></i> مراجعات واختبارات تفاعلية</li>
+              <li><i class="fa-solid fa-check-circle"></i> دعم مباشر من الأستاذ</li>
+              <li><i class="fa-solid fa-check-circle"></i> ملخصات وخرائط ذهنية</li>
+            </ul>
+
+            <div>
+              <span class="price-badge">
+                <i class="fa-solid fa-bolt"></i> أفضل سعر لفترة محدودة
+              </span>
+            </div>
+          </div>
+
+          <!-- ===== زر إنستغرام ===== -->
+          <a href="https://www.instagram.com/jflhsn" target="_blank" rel="noopener noreferrer" class="btn-instagram">
+            <i class="fa-brands fa-instagram"></i>
+            اطلب البطاقة الآن
+          </a>
+
+          <p style="margin-top: 20px; font-size: 14px; color: var(--text);">
+            <i class="fa-regular fa-clock"></i> العرض لفترة محدودة
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== الفوتر ===== -->
+  <footer>
+    <div class="container">
+      © 2026 منصة جفال التعليمية — جميع الحقوق محفوظة
+    </div>
+  </footer>
+
+  <!-- ===== زر الصعود للأعلى ===== -->
+  <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()" aria-label="الصعود للأعلى">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script>
+    // ===== فتح / إغلاق القائمة =====
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    document.querySelectorAll(".nav-links a").forEach(function(link) {
+      link.addEventListener("click", function() {
+        document.getElementById("navLinks").classList.remove("active");
+      });
+    });
+
+    // ===== ظهور العناصر عند التمرير =====
+    const revealElements = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 }
+    );
+    revealElements.forEach(function(element) {
+      revealObserver.observe(element);
+    });
+
+    // ===== تشغيل فيديو واحد فقط =====
+    const videos = document.querySelectorAll("video");
+    videos.forEach(function(video) {
+      video.addEventListener("play", function() {
+        videos.forEach(function(other) {
+          if (other !== video) other.pause();
+        });
+      });
+    });
+
+    // ===== زر الصعود للأعلى =====
+    const scrollBtn = document.getElementById("scrollTopBtn");
+
+    window.addEventListener("scroll", function() {
+      if (window.scrollY > 400) {
+        scrollBtn.classList.add("visible");
+      } else {
+        scrollBtn.classList.remove("visible");
+      }
+    });
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // ===== الوضع الداكن =====
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const icon = document.getElementById("darkIcon");
+      if (document.body.classList.contains("dark-mode")) {
+        icon.className = "fa-solid fa-sun";
+      } else {
+        icon.className = "fa-solid fa-moon";
+      }
+      // حفظ التفضيل
+      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    }
+
+    // استعادة الوضع الداكن
+    if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark-mode");
+      document.getElementById("darkIcon").className = "fa-solid fa-sun";
+    }
+  </script>
+
+</body>
+</html>
